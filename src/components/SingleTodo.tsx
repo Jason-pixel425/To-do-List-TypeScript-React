@@ -21,7 +21,12 @@ const SingleTodo: React.FC<Props> = ({ todo, todos, setTodos }) => {
                 }
             })
         })
-        // const completedTodo = todos.filter(todo => todo.id === todoId)
+    }
+
+    const handleDelete = (todoId: number) => {
+        setTodos(prevTodos => {
+            return prevTodos.filter(todoItem => todoItem.id !== todoId)
+        })
     }
 
     return (
@@ -35,7 +40,7 @@ const SingleTodo: React.FC<Props> = ({ todo, todos, setTodos }) => {
             )}
             <div className="flex p-1 items-center">
                 <span className="icon ml-2 text-2xl cursor-pointer"><AiFillEdit /></span>
-                <span className="icon ml-2 text-2xl cursor-pointer"><AiFillDelete /></span>
+                <span className="icon ml-2 text-2xl cursor-pointer" onClick={() => handleDelete(todo.id)}><AiFillDelete /></span>
                 <span className="icon ml-2 text-2xl cursor-pointer" onClick={() => handleDone(todo.id)}><MdDone /></span>
             </div>
         </form>
