@@ -15,7 +15,8 @@ const InputField:React.FC<Props> = ({todo, setTodo, handleAdd}) => {
             handleAdd(e)
             inputRef.current?.blur()
         }}>
-            <input type='input' 
+            <input type='input'
+            aria-label="Enter a task" 
             ref={inputRef}
             value={todo} 
             onChange={(e => setTodo(e.target.value))}
