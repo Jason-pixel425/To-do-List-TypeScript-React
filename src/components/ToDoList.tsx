@@ -8,7 +8,7 @@ interface Props {
 }
 
 const ToDoList: React.FC<Props> = ({ todos, setTodos }) => {
-    
+
     const todoArr = todos.map(todo => {
          return <SingleTodo todo={todo} key={todo.id} todos={todos} setTodos={setTodos} />
     })
