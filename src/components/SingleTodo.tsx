@@ -1,5 +1,5 @@
 import { Todo } from './model'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { FaSave } from "react-icons/fa";
 import { IoExit } from "react-icons/io5";
@@ -17,6 +17,12 @@ const SingleTodo: React.FC<Props> = ({ todo, todos, setTodos }) => {
     const [edit, setEdit] = useState<boolean>(false)
     // The new string the user enters to replace todo.todo | default the current value of todo.todo
     const [editTodo, setEditTodo] = useState<string>(todo.todo)
+
+    const inputRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+        inputRef.current?.focus()
+    }, [edit])
 
     const handleDone = (todoId: number)  => {
         setTodos(prevTodos => {
@@ -57,11 +63,12 @@ const SingleTodo: React.FC<Props> = ({ todo, todos, setTodos }) => {
     }
    
 
+
     return (
         <form className="todos_single flex w-full lg:w-[40%] rounded-sm p-5 mt-4 bg-[url(https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg)]" onSubmit={(e) => handleEdit(e, todo.id)}>
             {
                 edit ? (
-                    <input className="bg-white grow text-xl p-1 border-none focus:outline-none" value={editTodo} onChange={(e => setEditTodo(e.target.value))}/>
+                    <input ref={inputRef} className="bg-white grow text-xl p-1 border-none focus:outline-none" value={editTodo} onChange={(e => setEditTodo(e.target.value))}/>
                 ): (todo.isDone === true ? (
                         <s className="todos_single-text grow p-1 text-left border-none text-[1.25rem] focus:outline-none">{todo.todo}</s>
                         ) : (
