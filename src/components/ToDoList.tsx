@@ -39,7 +39,7 @@ const ToDoList: React.FC<Props> = ({ todos, setTodos, completedTodos, setComplet
                 <div ref={provided.innerRef} {...provided.droppableProps} className="todos w-[80%] mb-4 rounded-sm md:w-1/2 text-wrap p-5 flex flex-col items-center bg-rose-300 items-center">
                     <h2 className="text-2xl font-Merienda">Completed Tasks</h2>
                         { completedTodos.map((todo, index) => {
-                            return todo.isDone ? <SingleTodo todo={todo} index={index} key={todo.id} todos={completedTodos} setTodos={setCompletedTodos} /> : null
+                            return todo.isDone ? <SingleTodo todo={todo} index={index} key={todo.id} todos={completedTodos} setTodos={setCompletedTodos} /> : <SingleTodo todo={todo} index={index} key={todo.id} todos={completedTodos} setTodos={setCompletedTodos} />
                         })
                     }
                     {provided.placeholder}
